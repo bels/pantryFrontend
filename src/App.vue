@@ -2,11 +2,13 @@
   <img alt="Vue logo" src="./assets/logo.png" />
   <div class="container">
     <NewItemForm />
+    <NewItemTypeForm />
   </div>
 </template>
 
 <script setup>
   import NewItemForm from './components/NewItemForm.vue';
+  import NewItemTypeForm from './components/NewItemTypeForm.vue';
 </script>
 
 <style>
