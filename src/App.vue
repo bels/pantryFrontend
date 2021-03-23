@@ -23,16 +23,70 @@
   			</ul>
   			<div class="tab-content" id="tab-content">
   				<div class="tab-pane fade show active" id="item-tab-content" role="tabpanel" aria-labelledby="item-tab-link">
-  					<NewItemForm />
+            <div class="row pt-3">
+              <div class="col-6">
+                <NewItemForm />
+              </div>
+              <div class="col-6">
+                <h2 class="text-center">Item List</h2>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Amount</th>
+                      <th>Location</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr v-for="item in items" :key="item.id">
+                      <td>{{item.name}}</td>
+                      <td>{{item.amount}}</td>
+                      <td>{{item.location}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
   				</div>
   				<div class="tab-pane fade show" id="item-types-tab-content" role="tabpanel" aria-labelledby="item-types-tab-link">
-  					<NewItemTypeForm />
+            <div class="row pt-3">
+              <div class="col-6">
+                <NewItemTypeForm />
+              </div>
+              <div class="col-6">
+                <h2 class="text-center">Item Types</h2>
+                <ul id="item-type-list">
+                  <li v-for="item_type in itemTypes" :key="item_type.id">
+                    {{item_type.name}}
+                  </li>
+                </ul>
+              </div>
+            </div>
   				</div>
   				<div class="tab-pane fade show" id="item-location-tab-content" role="tabpanel" aria-labelledby="item-locations-tab-link">
-  					
+  					<div class="row pt-3">
+              <div class="col-6">
+                <NewItemLocationForm />
+              </div>
+              <div class="col-6">
+                <h2 class="text-center">Item Locations</h2>
+                <ul id="item-type-list">
+                  <li v-for="location in itemLocations" :key="location.id">
+                    {{location.name}}
+                  </li>
+                </ul>
+              </div>
+            </div>
   				</div>
   				<div class="tab-pane fade show" id="recipe-tab-content" role="tabpanel" aria-labelledby="recipe-tab-link">
-  					
+  					<div class="row pt-3">
+              <div class="col-6">
+                <NewRecipeForm />
+              </div>
+              <div class="col-6">
+                <h2 class="text-center">Recipe</h2>
+              </div>
+            </div>
   				</div>
   			</div>
   		</div>
@@ -40,9 +94,35 @@
   </div>
 </template>
 
-<script setup>
+<script>
   import NewItemForm from './components/NewItemForm.vue';
   import NewItemTypeForm from './components/NewItemTypeForm.vue';
+  import NewItemLocationForm from './components/NewItemLocationForm.vue';
+  import NewRecipeForm from './components/NewRecipeForm.vue';
+
+  export default{
+    components: {
+      NewItemForm: NewItemForm,
+      NewItemTypeForm: NewItemTypeForm,
+      NewItemLocationForm: NewItemLocationForm,
+      NewRecipeForm: NewRecipeForm
+    },
+    created() {
+      this.$store.dispatch('getItemTypes');
+      this.$store.dispatch('getItems');
+    },
+    computed: {
+      itemTypes() {
+        return this.$store.state.itemTypes
+      },
+      items() {
+        return this.$store.state.items
+      },
+      itemLocations(){
+        return this.$store.state.locations
+      }
+    }
+  }
 </script>
 
 <style>

@@ -1,8 +1,8 @@
 <template>
 	<form>
 		<div class="form-group">
-			<label for="item-type-name">Item Type Name</label>
-			<input type="text" class="form-control" v-model="itemTypeName" />
+			<label for="item-location-name">Item Location Name</label>
+			<input type="text" class="form-control" v-model="itemLocationName" />
 		</div>
 		<button type="button" class="btn btn-primary" v-on:click="submit">Create</button>
 	</form>
@@ -12,13 +12,13 @@
 	export default {
 		data: function(){
 			return {
-				itemTypeName: ''
+				itemLocationName: ''
 			}
 		},
 		methods: {
 			submit: function(){
-				this.$store.dispatch('postItemType',{name: this.itemTypeName});
-				this.itemTypeName = '';
+				this.$store.dispatch('postLocation',{name: this.itemLocationName});
+				this.itemLocationName = '';
 			}
 		}
 	}
