@@ -1,17 +1,26 @@
 <template>
-	<label>{{item.name}}</label>
-	<input class="form-control" type="checkbox" @click="clickSelected">
-	<input class="form-control" type="text" v-model="amount" />
-	<select v-model="uom" class="custom-select">
-		<option value="ounce">Ounce</option>
-		<option value="dry-cup">Dry Cup</option>
-		<option value="fluid-cup">Fluid Cup</option>
-		<option value="pint">Pint</option>
-		<option value="quart">Quart</option>
-		<option value="teaspoon">Teaspoon</option>
-		<option value="tablespoon">TableSpoon</option>
-	</select>
-	<button type="button" class="btn btn-primary" @click="logEverything">Log It</button>
+	<div class="form-row form-group">
+		<div class="col">
+			<div class="form-check">
+				<input class="form-check-input" type="checkbox" @click="clickSelected" id="check{{item.id}}">
+				<label class="form-check-label" for="check{{item.id}}">{{item.name}}</label>
+			</div>
+		</div>
+		<div class="col">
+			<input class="form-control" type="text" v-model="amount" />
+		</div>
+		<div class="col">
+			<select v-model="uom" class="custom-select">
+				<option value="ounce">Ounce</option>
+				<option value="dry-cup">Dry Cup</option>
+				<option value="fluid-cup">Fluid Cup</option>
+				<option value="pint">Pint</option>
+				<option value="quart">Quart</option>
+				<option value="teaspoon">Teaspoon</option>
+				<option value="tablespoon">TableSpoon</option>
+			</select>
+		</div>
+	</div>
 </template>
 
 <script>
@@ -30,11 +39,6 @@ export default {
 	methods: {
 		clickSelected: function(){
 			this.selected = !this.selected;
-		},
-		logEverything: function(){
-			console.log(this.amount);
-			console.log(this.uom);
-			console.log(this.selected);
 		}
 	}
 }
