@@ -3,10 +3,10 @@
 		<div class="form-row form-group">
 			<label for="recipe-name-input" class="col-3">Name</label>
 			<div class="col">
-				<input type="text" id="recipe-name-input" class="form-control" />
+				<input type="text" id="recipe-name-input" class="form-control" v-model="recipeName" />
 			</div>
 		</div>
-		<PotentialRecipeItem v-for="item in potentialItems" :item="item" @handle-click="syncRecipeItems" />
+		<PotentialRecipeItem v-for="item in potentialItems" :item="item" @click="syncRecipeItems" :key="item.id" />
 	</form>
 	<div class="row mt-3">
 		<div class="col text-center">
@@ -20,7 +20,10 @@
 
 	export default {
 		data: function(){
-			recipeItems: []
+			return {
+				recipeName: '',
+				recipeItems: []
+			}
 		},
 		components: {
 			PotentialRecipeItem: PotentialRecipeItem
@@ -35,7 +38,9 @@
 			
 			},
 			saveRecipe: function(){
-				
+				this.$store.dispatch('postRecipe',{name: this.recipeName, items: this.recipeItems});
+				this.recipeName = '';
+				this.recipeItems = [];
 			}
 		}
 	}

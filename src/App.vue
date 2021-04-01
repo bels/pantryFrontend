@@ -85,6 +85,11 @@
               </div>
               <div class="col-6">
                 <h2 class="text-center">Recipe</h2>
+                <ul id="recipe-list">
+                  <li v-for="recipe in recipes" :key="recipe.id">
+                    {{recipe.name}}
+                  </li>
+                </ul>
               </div>
             </div>
   				</div>
@@ -120,6 +125,9 @@
       },
       itemLocations(){
         return this.$store.state.locations
+      },
+      recipes() {
+        return this.$store.state.recipes
       }
     }
   }

@@ -32,6 +32,12 @@ const store = createStore({
 		},
 		loadLocations(state,locations){
 			state.locations = locations;
+		},
+		addRecipe(state,recipe){
+			state.recipes.push(recipe);
+		},
+		loadRecipes(state, recipes) {
+			state.recipes = recipse;
 		}
 	},
 	actions: {
@@ -63,7 +69,7 @@ const store = createStore({
 		},
 		postItemType(context,data){
 			api
-				.post('http://localhost:3000/item/type',data)
+				.post('/item/type',data)
 					.then((res) => {
 						context.commit('addItemType',res.data);
 					})
@@ -81,6 +87,22 @@ const store = createStore({
 				.get('/locations')
 					.then((res) => {
 						context.commit('loadLocations',res.data);
+					}).catch((error) => {
+						console.log(error);
+					});
+		},
+		postRecipe(context,data){
+			api
+				.post('/recipe',data)
+					.then((res) => {
+						context.commit('addRecipe',res.data);
+					});
+		},
+		getRecipes(context){
+			api
+				.get('/recipes')
+					.then((res) => {
+						context.commit('loadRecipes',res.data);
 					}).catch((error) => {
 						console.log(error);
 					});
